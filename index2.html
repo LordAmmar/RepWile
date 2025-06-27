@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Area - WebPro</title>
+    <style>
+        /* Reset CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header dan Menu */
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: inline-block;
+        }
+
+        .logo span {
+            color: #3498db;
+        }
+
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        nav {
+            display: inline-block;
+            float: right;
+        }
+
+        nav ul {
+            list-style: none;
+        }
+
+        nav ul li {
+            display: inline-block;
+            margin-left: 2rem;
+            position: relative;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #3498db;
+        }
+
+        /* Konten Utama */
+        .container {
+            max-width: 1200px;
+            margin: 6rem auto 2rem;
+            padding: 0 2rem;
+        }
+
+        .download-section {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .section-title h2 {
+            font-size: 2rem;
+            color: #2c3e50;
+        }
+
+        .section-title p {
+            color: #7f8c8d;
+            font-size: 1rem;
+        }
+
+        /* Tabel Style seperti MediaFire */
+        .download-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+        }
+
+        .download-table th {
+            background-color: #f2f2f2;
+            padding: 12px 15px;
+            text-align: left;
+            font-weight: 600;
+            color: #555;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .download-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+            vertical-align: middle;
+        }
+
+        .download-table tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        .file-icon {
+            font-size: 1.8rem;
+            margin-right: 10px;
+            vertical-align: middle;
+            color: #3498db;
+        }
+
+        .file-info {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .file-name {
+            font-weight: 500;
+            color: #2c3e50;
+            margin-bottom: 3px;
+        }
+
+        .file-size {
+            font-size: 0.85rem;
+            color: #7f8c8d;
+        }
+
+        /* Button Styles */
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+            justify-content: flex-end;
+        }
+
+        .visit-btn {
+            display: inline-block;
+            background-color: #2ecc71;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .visit-btn:hover {
+            background-color: #27ae60;
+            transform: translateY(-1px);
+        }
+
+        .download-btn {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .download-btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-1px);
+        }
+
+        .file-actions {
+            text-align: right;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-content p {
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .social-links {
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.2rem;
+            margin: 0 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #3498db;
+        }
+
+        /* Responsif */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: inline-block;
+                float: right;
+            }
+
+            nav {
+                display: none;
+                width: 100%;
+                float: none;
+                margin-top: 1rem;
+            }
+
+            nav.active {
+                display: block;
+            }
+
+            nav ul li {
+                display: block;
+                margin: 1rem 0;
+            }
+
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+
+            .download-section {
+                padding: 1.5rem;
+            }
+
+            .download-table {
+                display: block;
+                overflow-x: auto;
+            }
+
+            .file-actions {
+                text-align: center;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">Rep<span>Wile</span></div>
+        <div class="menu-toggle" id="menuToggle">
+            <i class="fas fa-bars"></i>
+        </div>
+        <nav id="mainNav">
+            <ul>
+                <li><a href="index.html">Beranda</a></li>
+                <li><a href="index.html#services">Layanan</a></li>
+                <li><a href="index2.html">Project</a></li>
+                <li><a href="index.html#contact">Kontak</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="download-section">
+            <div class="section-title">
+                <h2>Project Area</h2>
+                <p>Lihat dan Download berbagai file dan dokumen yang tersedia</p>
+            </div>
+            
+            <table class="download-table">
+                <thead>
+                    <tr>
+                        <th>Nama Project</th>
+                        <th>Ukuran</th>
+                        <th class="file-actions">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <i class="fas fa-globe file-icon"></i>
+                            <div class="file-info">
+                                <div class="file-name">Website Portfolio</div>
+                                <div class="file-size">HTML/CSS/JS</div>
+                            </div>
+                        </td>
+                        <td>2.4 MB</td>
+                        <td class="file-actions">
+                            <div class="action-buttons">
+                                <a href="https://lordammar.github.io/RepWile2/" class="visit-btn" target="_blank">
+                                    <i class="fas fa-external-link-alt"></i> Kunjungi
+                                </a>
+                                <a href="https://drive.google.com/file/d/1DBiDo95PfAyv3EMNCC4yjeiUH9ukeEdr/view?usp=drivesdk"class="download-btn">
+                                    <i class="fas fa-download"></i> Download
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="fas fa-file-pdf file-icon"></i>
+                            <div class="file-info">
+                                <div class="file-name">Panduan Pengguna.pdf</div>
+                                <div class="file-size">PDF Document</div>
+                            </div>
+                        </td>
+                        <td>1.1 MB</td>
+                        <td class="file-actions">
+                            <div class="action-buttons">
+                                <a href="#" class="visit-btn" target="_blank">
+                                    <i class="fas fa-eye"></i> Preview
+                                </a>
+                                <a href="#" class="download-btn">
+                                    <i class="fas fa-download"></i> Download
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="fas fa-file-archive file-icon"></i>
+                            <div class="file-info">
+                                <div class="file-name">Source Code Project.zip</div>
+                                <div class="file-size">ZIP Archive</div>
+                            </div>
+                        </td>
+                        <td>15.7 MB</td>
+                        <td class="file-actions">
+                            <div class="action-buttons">
+                                <a href="#" class="visit-btn" target="_blank">
+                                    <i class="fab fa-github"></i> GitHub
+                                </a>
+                                <a href="#" class="download-btn">
+                                    <i class="fas fa-download"></i> Download
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="fas fa-file-image file-icon"></i>
+                            <div class="file-info">
+                                <div class="file-name">Assets Desain.psd</div>
+                                <div class="file-size">Photoshop File</div>
+                            </div>
+                        </td>
+                        <td>8.3 MB</td>
+                        <td class="file-actions">
+                            <div class="action-buttons">
+                                <a href="#" class="visit-btn" target="_blank">
+                                    <i class="fas fa-image"></i> Lihat
+                                </a>
+                                <a href="#" class="download-btn">
+                                    <i class="fas fa-download"></i> Download
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="fas fa-file-excel file-icon"></i>
+                            <div class="file-info">
+                                <div class="file-name">Data Laporan.xlsx</div>
+                                <div class="file-size">Excel Spreadsheet</div>
+                            </div>
+                        </td>
+                        <td>3.6 MB</td>
+                        <td class="file-actions">
+                            <div class="action-buttons">
+                                <a href="#" class="visit-btn" target="_blank">
+                                    <i class="fas fa-table"></i> Preview
+                                </a>
+                                <a href="#" class="download-btn">
+                                    <i class="fas fa-download"></i> Download
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <h3>Hubungi Kami</h3>
+            <p>Email: ammarkedua69@gmail.com</p>
+            <p>Telepon: (+62) 815-5377-9540</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+            <p>&copy; 2023 WebPro. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Menu toggle untuk mobile
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            const nav = document.getElementById('mainNav');
+            nav.classList.toggle('active');
+        });
+
+        // Efek scroll untuk header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.background = 'rgba(44, 62, 80, 0.95)';
+                header.style.padding = '0.5rem 2rem';
+            } else {
+                header.style.background = '#2c3e50';
+                header.style.padding = '1rem 2rem';
+            }
+        });
+
+        // Tambahkan event listener untuk tombol download
+        document.querySelectorAll('.download-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                if (this.getAttribute('href') === '#') {
+                    e.preventDefault();
+                    const fileName = this.closest('tr').querySelector('.file-name').textContent;
+                    alert(`Download akan dimulai untuk file: ${fileName}\n\nUntuk implementasi nyata, ganti href dengan link file yang sebenarnya.`);
+                }
+            });
+        });
+
+        // Tambahkan event listener untuk tombol visit
+        document.querySelectorAll('.visit-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                if (this.getAttribute('href') === '#') {
+                    e.preventDefault();
+                    alert('Link preview belum tersedia. Silakan gunakan tombol download.');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
